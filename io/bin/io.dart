@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:convert';
 
 Future<void> main() async {
-  var config = File('config.txt');
+  var config = File('config1.txt');
   var stringContents = await config.readAsString();
   print(
       'The file is ${stringContents.length} characters long.');
@@ -13,9 +13,6 @@ Future<void> main() async {
   print('The file is ${lines.length} lines long.');
 
 
-// Reading a file as binary
-// The following code reads an entire file as bytes into a list of ints. 
-// The call to readAsBytes() returns a Future, which provides the result when it’s available.
 
   var config2 = File('config2.txt');
 
@@ -23,22 +20,10 @@ Future<void> main() async {
   print('The file is ${contents.length} bytes long.');
 
 
-// Handling errors
-// To capture errors so they don’t result in uncaught exceptions, you can register a catchError handler on the Future, or (in an async function) use try-catch:
+
 
   var config3 = File('config3.txt');
-  try {
-    var contents = await config3.readAsString();
-    print(contents);
-  } catch (e) {
-    print(e);
-  }
-
-
-
-
-  var config4 = File('config4.txt');
-  Stream<List<int>> inputStream = config4.openRead();
+  Stream<List<int>> inputStream = config3.openRead();
 
   var lines2 = utf8.decoder
       .bind(inputStream)
@@ -51,43 +36,6 @@ Future<void> main() async {
   } catch (e) {
     print(e);
   }
-
-
-var logFile = File('log.txt');
-var sink = logFile.openWrite();
-sink.write('FILE ACCESSED ${DateTime.now()}\n');
-await sink.flush();
-await sink.close();
-
-
-var sink2 = logFile.openWrite(mode: FileMode.append);
-
-
-  var dir = Directory('tmp');
-
-  try {
-    var dirList = dir.list();
-    await for (final FileSystemEntity f in dirList) {
-      if (f is File) {
-        print('Found file ${f.path}');
-      } else if (f is Directory) {
-        print('Found dir ${f.path}');
-      }
-    }
-  } catch (e) {
-    print(e.toString());
-  }
-
-
-
-
-
-
-  final requests = await HttpServer.bind('localhost', 8888);
-  await for (final request in requests) {
-
-  }
-
 
 void processRequest(HttpRequest request) {
   print('Got request for ${request.uri.path}');
