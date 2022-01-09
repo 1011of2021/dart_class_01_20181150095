@@ -16,6 +16,7 @@ void main(List<String> arguments) {
   //最大值和最小值
   assert(max(1, 1000) == 1000);
   assert(min(1, -1000) == -1000);
+  
 
   //数学常数
   // See the Math library for additional constants.
